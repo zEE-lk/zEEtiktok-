@@ -217,25 +217,41 @@ details p{margin-top:12px;color:var(--mut);line-height:1.6}
         gap: 8px;
     }
 }
-/* download animation */
+/* 3D download animation */
 @keyframes spin{to{transform:rotate(360deg)}}
 .btn.loading{pointer-events:none;opacity:.85}
 .btn.loading::before{content:"";width:16px;height:16px;border:3px solid rgba(255,255,255,.5);border-top-color:#fff;border-radius:50%;animation:spin .7s linear infinite}
 .btn.ghost.loading::before{border-color:#ffc2e0;border-top-color:var(--pink)}
-.dl{display:none;margin-top:18px}
-.dl.show{display:block;animation:pop .5s cubic-bezier(.2,1.4,.4,1)}
-.dl-top{display:flex;justify-content:space-between;align-items:center;font-weight:700;margin-bottom:8px}
-.dl-ic{display:inline-block;animation:dlbounce .8s ease-in-out infinite}
-@keyframes dlbounce{50%{transform:translateY(5px)}}
-.dl.done .dl-ic{animation:tick .5s cubic-bezier(.2,1.6,.4,1)}
-@keyframes tick{from{transform:scale(0) rotate(-90deg)}}
-.dl-bar{height:14px;border-radius:99px;background:var(--blush);overflow:hidden;box-shadow:inset 0 0 0 1px #ffc2e0}
-.dl-bar i{display:block;height:100%;width:0;border-radius:99px;transition:width .25s ease-out;background:linear-gradient(90deg,var(--pink),#ff8cc6);background-image:repeating-linear-gradient(45deg,rgba(255,255,255,.35) 0 10px,transparent 10px 20px),linear-gradient(90deg,var(--pink),#ff8cc6);background-size:28px 28px,100% 100%;animation:stripe .6s linear infinite}
+.dl{display:none;margin-top:24px;perspective:900px}
+.dl.show{display:block}
+.dl3d{position:relative;padding:20px 22px 18px;border-radius:26px;transform-style:preserve-3d;background:linear-gradient(160deg,#fff,var(--blush));box-shadow:inset 0 1px 0 #fff,0 7px 0 #f6b3d3,0 8px 0 #e88fba,0 28px 44px rgba(255,46,147,.38);animation:enter .7s cubic-bezier(.2,1.4,.4,1),sway 5s ease-in-out .7s infinite}
+@keyframes enter{from{opacity:0;transform:rotateX(60deg) translateY(30px) scale(.9)}}
+@keyframes sway{0%,100%{transform:rotateX(9deg) rotateY(-8deg)}50%{transform:rotateX(3deg) rotateY(8deg)}}
+.dl.done .dl3d{animation:fin .9s cubic-bezier(.2,1.2,.4,1) forwards}
+@keyframes fin{0%{transform:rotateX(9deg) rotateY(0)}60%{transform:rotateX(0) rotateY(200deg) scale(1.06)}100%{transform:rotateX(0) rotateY(360deg) scale(1)}}
+.dl-top{display:flex;justify-content:space-between;align-items:center;margin-bottom:14px;transform:translateZ(34px)}
+.dl-l{display:flex;align-items:center;gap:12px;font-weight:700}
+.dl-ic{display:grid;place-items:center;width:44px;height:44px;border-radius:14px;font-size:1.3rem;background:linear-gradient(135deg,var(--pink),#ff8cc6);box-shadow:0 5px 0 #c4125f,0 12px 18px rgba(255,46,147,.4);animation:coin 1.6s ease-in-out infinite alternate}
+@keyframes coin{from{transform:rotateY(-40deg) translateY(0)}to{transform:rotateY(40deg) translateY(-4px)}}
+.dl.done .dl-ic{animation:tick .6s cubic-bezier(.2,1.6,.4,1)}
+@keyframes tick{from{transform:scale(0) rotate(-120deg)}}
+.dl-top b{font:900 1.7rem 'Unbounded',sans-serif;color:var(--pink);text-shadow:1px 1px 0 #c4125f,2px 2px 0 #c4125f,3px 3px 0 #c4125f,4px 6px 12px rgba(196,18,95,.4)}
+.dl-bar{position:relative;height:24px;border-radius:99px;background:#ffdcec;transform:translateZ(18px);box-shadow:inset 0 4px 8px rgba(196,18,95,.28),inset 0 -2px 0 #fff,0 5px 0 #f3a9cb,0 14px 22px rgba(255,46,147,.3)}
+.dl-bar i{position:relative;display:block;height:100%;width:0;border-radius:99px;transition:width .25s ease-out;background-image:repeating-linear-gradient(45deg,rgba(255,255,255,.3) 0 10px,transparent 10px 20px),linear-gradient(180deg,#ff6bb5,#ff2e93 60%,#d81b78);background-size:28px 28px,100% 100%;box-shadow:0 0 18px rgba(255,46,147,.7);animation:stripe .6s linear infinite}
+.dl-bar i::after{content:"";position:absolute;left:8px;right:12px;top:3px;height:6px;border-radius:99px;background:rgba(255,255,255,.55)}
+.dl-bar i::before{content:"";position:absolute;right:-6px;top:50%;width:32px;height:32px;margin-top:-16px;border-radius:50%;z-index:2;background:radial-gradient(circle at 35% 30%,#fff,#ff8cc6 35%,#ff2e93 72%);box-shadow:0 7px 12px rgba(196,18,95,.5)}
 @keyframes stripe{to{background-position:28px 0,0 0}}
 .dl.indet .dl-bar i{width:40%!important;animation:stripe .6s linear infinite,slide 1.1s ease-in-out infinite alternate}
-@keyframes slide{from{margin-left:0}to{margin-left:60%}}
+@keyframes slide{from{margin-left:0}to{margin-left:56%}}
 .dl.done .dl-bar i{animation:none}
-.dl small{display:block;margin-top:8px;color:var(--mut)}.dl small a{color:var(--pink);font-weight:700;text-decoration:underline}
+.dl.done .dl-bar i::before{background:radial-gradient(circle at 35% 30%,#fff,#9be8bc 35%,#1a9e5c 75%)}
+.dl small{display:block;margin-top:18px;color:var(--mut);transform:translateZ(10px)}
+.dl small a{color:var(--pink);font-weight:700;text-decoration:underline}
+.pt{position:absolute;top:6px;width:12px;height:12px;border-radius:4px;opacity:0;pointer-events:none;background:linear-gradient(135deg,#ff8cc6,#ff2e93);box-shadow:0 4px 8px rgba(196,18,95,.4);animation:fall 2s ease-in infinite}
+.pt:nth-child(1){left:12%}.pt:nth-child(2){left:28%;animation-delay:.4s}.pt:nth-child(3){left:46%;animation-delay:.9s}
+.pt:nth-child(4){left:62%;animation-delay:.2s}.pt:nth-child(5){left:78%;animation-delay:.7s}.pt:nth-child(6){left:90%;animation-delay:1.2s}
+@keyframes fall{0%{opacity:0;transform:translate3d(0,-8px,110px) rotate(0)}15%{opacity:1}100%{opacity:0;transform:translate3d(0,92px,10px) rotate(300deg) scale(.5)}}
+.dl.done .pt{display:none}
 .rv{opacity:0;transform:translateY(40px) rotateX(10deg);transition:1s cubic-bezier(.2,.8,.2,1)}.rv.in{opacity:1;transform:none}
 @media(max-width:860px){nav ul{display:none}.bento{grid-template-columns:1fr 1fr;grid-auto-rows:170px}.t1,.t4{grid-column:span 2}.steps,#about .wrap{grid-template-columns:1fr}.fan{height:330px}.v1{transform:translateX(-120px) rotateZ(-8deg) scale(.8)}.v3{transform:translateX(120px) rotateZ(8deg) scale(.8)}#result{flex-direction:column;text-align:center}.bar{border-radius:28px;flex-direction:column}.bar input{padding:14px}}
 @media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}.rv{opacity:1;transform:none}}
@@ -267,9 +283,12 @@ details p{margin-top:12px;color:var(--mut);line-height:1.6}
         <p id="rAuthor"></p>
         <div class="row"><button class="btn" id="dlHd">Download HD</button><button class="btn ghost" id="dlSd">Download SD</button></div>
         <div class="dl" id="dl" role="status">
-          <div class="dl-top"><span><span class="dl-ic" id="dlIc">⬇️</span> <span id="dlLabel">Downloading…</span></span><b id="dlPct">0%</b></div>
-          <div class="dl-bar"><i id="dlFill"></i></div>
-          <small id="dlInfo"></small>
+          <div class="dl3d">
+            <span class="pt"></span><span class="pt"></span><span class="pt"></span><span class="pt"></span><span class="pt"></span><span class="pt"></span>
+            <div class="dl-top"><span class="dl-l"><span class="dl-ic" id="dlIc">⬇️</span><span id="dlLabel">Downloading…</span></span><b id="dlPct">0%</b></div>
+            <div class="dl-bar"><i id="dlFill"></i></div>
+            <small id="dlInfo"></small>
+          </div>
         </div>
       </div>
     </div>
@@ -346,35 +365,22 @@ details p{margin-top:12px;color:var(--mut);line-height:1.6}
 
 <footer class="site-footer">
     <div class="footer-container">
-
         <div class="footer-brand">
-            <div class="footer-logo">
-                <span>zEE</span><strong>tiktok</strong>
-            </div>
-            <p>
-                Fast, simple & clean TikTok video downloads.
-            </p>
+            <div class="footer-logo"><span>zEE</span><strong>tiktok</strong></div>
+            <p>Fast, simple &amp; clean TikTok video downloads.</p>
         </div>
-
         <div class="footer-links">
             <a href="#">Home</a>
             <a href="#">Features</a>
             <a href="#">About</a>
             <a href="#">Contact</a>
         </div>
-
         <div class="footer-note">
             <span>© <span id="yr"></span> zEEtiktok</span>
-            <small>
-                Not affiliated with TikTok or ByteDance.
-            </small>
-            <small>
-                Download only content you have rights to.
-            </small>
+            <small>Not affiliated with TikTok or ByteDance.</small>
+            <small>Download only content you have rights to.</small>
         </div>
-
     </div>
-
     <div class="footer-bottom">
         <span>Made with ♥ for creators</span>
         <span>© <span id="yr2"></span> zEE.lk</span>
