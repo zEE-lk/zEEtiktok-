@@ -76,6 +76,14 @@ h2{font-size:clamp(1.9rem,4.5vw,3.4rem);line-height:1.05;font-weight:900;margin-
 .t1{grid-column:span 2;grid-row:span 2;background:linear-gradient(150deg,var(--pink),#ff7ab8);color:#fff}
 .t1 p{color:#ffe6f2}.t1 .e{font-size:5rem}
 .t4{grid-column:span 2}
+.tile .bg{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;z-index:0;transition:transform .8s cubic-bezier(.2,.8,.2,1)}
+.tile:hover .bg{transform:scale(1.1)}
+.tile::before{content:"";position:absolute;inset:0;z-index:1;background:linear-gradient(to top,rgba(43,15,32,.85) 0%,rgba(255,46,147,.35) 55%,rgba(255,46,147,.05) 100%)}
+.tile h3,.tile p{position:relative;z-index:2;color:#fff}
+.tile p{color:#ffe6f2}
+.tile .e{z-index:2;display:grid;place-items:center;width:58px;height:58px;border-radius:18px;font-size:1.7rem;background:var(--glass);backdrop-filter:blur(10px);box-shadow:inset 0 0 0 1.5px #fff,0 10px 24px rgba(0,0,0,.2)}
+.t1 .e{width:78px;height:78px;font-size:2.6rem;border-radius:24px}
+.t1 h3{font-size:1.6rem}.t1 p{font-size:1.02rem;max-width:380px}
 .steps{display:grid;grid-template-columns:repeat(3,1fr);gap:22px}
 .step{padding:30px;border-radius:28px;background:#fff;box-shadow:0 18px 44px rgba(255,46,147,.14),inset 0 0 0 1.5px #ffd0e6}
 .step b{display:grid;place-items:center;width:46px;height:46px;border-radius:14px;background:var(--pink);color:#fff;font:700 1.1rem 'Unbounded';margin-bottom:18px;box-shadow:0 6px 0 #c4125f}
@@ -96,7 +104,119 @@ details p{margin-top:12px;color:var(--mut);line-height:1.6}
 #contact form{max-width:640px;display:grid;gap:14px;padding:32px;border-radius:32px;background:var(--glass);backdrop-filter:blur(18px);box-shadow:0 30px 70px rgba(255,46,147,.22),inset 0 0 0 2px #fff,0 0 0 1px #ffc2e0}
 .f,textarea{width:100%;padding:16px 20px;border:2px solid transparent;border-radius:18px;font:1rem 'DM Sans';background:#fff;box-shadow:0 0 0 1px #ffd0e6;color:var(--plum)}
 .f:focus,textarea:focus{outline:none;border-color:var(--pink)}
-footer{padding:36px 5vw;text-align:center;color:var(--mut);font-size:.9rem;position:relative;z-index:1}
+.duo{display:grid;grid-template-columns:1fr 1fr;gap:56px;align-items:start}
+.duo details,.duo #contact form,#contact form{max-width:100%}
+@media(max-width:860px){.duo{grid-template-columns:1fr;gap:70px}}
+.site-footer {
+    margin-top: 80px;
+    background: #080808;
+    color: #fff;
+    border-top: 1px solid rgba(255,255,255,0.08);
+    padding: 50px 6% 20px;
+}
+
+.footer-container {
+    max-width: 1200px;
+    margin: auto;
+    display: grid;
+    grid-template-columns: 1.4fr 1fr 1.5fr;
+    gap: 50px;
+    align-items: start;
+}
+
+.footer-logo {
+    font-size: 26px;
+    font-weight: 800;
+    letter-spacing: -1px;
+}
+
+.footer-logo span {
+    color: #fff;
+}
+
+.footer-logo strong {
+    background: linear-gradient(90deg, #ff0050, #00f2ea);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+.footer-brand p {
+    color: #888;
+    font-size: 14px;
+    margin-top: 12px;
+    line-height: 1.6;
+}
+
+.footer-links {
+    display: flex;
+    flex-direction: column;
+    gap: 13px;
+}
+
+.footer-links a {
+    color: #aaa;
+    text-decoration: none;
+    font-size: 14px;
+    transition: 0.3s;
+}
+
+.footer-links a:hover {
+    color: #fff;
+    transform: translateX(4px);
+}
+
+.footer-note {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    text-align: right;
+}
+
+.footer-note span {
+    font-size: 14px;
+    font-weight: 600;
+}
+
+.footer-note small {
+    color: #777;
+    font-size: 12px;
+    line-height: 1.5;
+}
+
+.footer-bottom {
+    max-width: 1200px;
+    margin: 40px auto 0;
+    padding-top: 20px;
+    border-top: 1px solid rgba(255,255,255,0.07);
+
+    display: flex;
+    justify-content: space-between;
+
+    color: #666;
+    font-size: 12px;
+}
+
+/* Mobile */
+@media (max-width: 700px) {
+
+    .site-footer {
+        padding: 40px 25px 20px;
+    }
+
+    .footer-container {
+        grid-template-columns: 1fr;
+        gap: 30px;
+    }
+
+    .footer-note {
+        text-align: left;
+    }
+
+    .footer-bottom {
+        flex-direction: column;
+        gap: 8px;
+    }
+}
 .rv{opacity:0;transform:translateY(40px) rotateX(10deg);transition:1s cubic-bezier(.2,.8,.2,1)}.rv.in{opacity:1;transform:none}
 @media(max-width:860px){nav ul{display:none}.bento{grid-template-columns:1fr 1fr;grid-auto-rows:170px}.t1,.t4{grid-column:span 2}.steps,#about .wrap{grid-template-columns:1fr}.fan{height:330px}.v1{transform:translateX(-120px) rotateZ(-8deg) scale(.8)}.v3{transform:translateX(120px) rotateZ(8deg) scale(.8)}#result{flex-direction:column;text-align:center}.bar{border-radius:28px;flex-direction:column}.bar input{padding:14px}}
 @media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}.rv{opacity:1;transform:none}}
@@ -146,10 +266,10 @@ footer{padding:36px 5vw;text-align:center;color:var(--mut);font-size:.9rem;posit
   <h2 class="rv">Everything you need,<br>nothing you don't</h2>
   <p class="sub rv">Built to be quick and simple on every device.</p>
   <div class="bento rv">
-    <div class="tile t1"><span class="e">💧</span><h3>Clean video, no logo</h3><p>The moving TikTok watermark is gone. Save the original picture only.</p></div>
-    <div class="tile"><span class="e">⚡</span><h3>Fast</h3><p>Ready in seconds.</p></div>
-    <div class="tile"><span class="e">📱</span><h3>Any device</h3><p>Phone, tablet, PC.</p></div>
-    <div class="tile t4"><span class="e">🎞️</span><h3>HD and SD</h3><p>Choose the quality that fits your storage and your screen.</p></div>
+    <div class="tile t1"><img class="bg" alt="" loading="lazy" src="https://images.unsplash.com/photo-1611162617213-7d7a39e9b1d7?w=900&q=75" onerror="this.remove()"><span class="e">💧</span><h3>Clean video, no logo</h3><p>The moving TikTok watermark is gone. Save the original picture only.</p></div>
+    <div class="tile"><img class="bg" alt="" loading="lazy" src="https://images.unsplash.com/photo-1516251193007-45ef944ab0c6?w=600&q=75" onerror="this.remove()"><span class="e">⚡</span><h3>Fast</h3><p>Ready in seconds.</p></div>
+    <div class="tile"><img class="bg" alt="" loading="lazy" src="https://images.unsplash.com/photo-1512941937669-90a1b58e7e9c?w=600&q=75" onerror="this.remove()"><span class="e">📱</span><h3>Any device</h3><p>Phone, tablet, PC.</p></div>
+    <div class="tile t4"><img class="bg" alt="" loading="lazy" src="https://images.unsplash.com/photo-1598387993441-a364f854c3e1?w=900&q=75" onerror="this.remove()"><span class="e">🎞️</span><h3>HD and SD</h3><p>Choose the quality that fits your storage and your screen.</p></div>
   </div>
 </section>
 
@@ -174,14 +294,15 @@ footer{padding:36px 5vw;text-align:center;color:var(--mut);font-size:.9rem;posit
   </div>
 </section>
 
-<section id="faq">
+<section id="contact" style="background:linear-gradient(#fff,var(--blush) 60%,#fff)">
+  <div class="duo">
+    <div id="faq">
   <h2 class="rv">Questions</h2><p class="sub rv"></p>
   <details><summary>Is zEEtiktok free?</summary><p>Yes. No account, no payment.</p></details>
   <details><summary>Where is the video saved?</summary><p>In your device's Downloads folder or gallery, depending on your browser.</p></details>
   <details><summary>Can I download private videos?</summary><p>No. Only public videos can be saved.</p></details>
-</section>
-
-<section id="contact" style="background:linear-gradient(var(--blush),#fff)">
+</div>
+    <div>
   <h2 class="rv">Contact us</h2>
   <p class="sub rv">Feedback or a problem with a link? Tell us.</p>
   <form id="cf" class="rv">
@@ -195,9 +316,52 @@ footer{padding:36px 5vw;text-align:center;color:var(--mut);font-size:.9rem;posit
     <button class="btn" id="send" type="submit">Send message</button>
     <p id="cmsg" role="status" style="color:var(--pink);font-weight:700"></p>
   </form>
+</div>
+  </div>
 </section>
 
-<footer>© <span id="yr"></span> zEEtiktok. Not affiliated with TikTok or ByteDance. Download only content you have rights to.</footer>
+<footer class="site-footer">
+    <div class="footer-container">
+
+        <div class="footer-brand">
+            <div class="footer-logo">
+                <span>zEE</span><strong>tiktok</strong>
+            </div>
+            <p>
+                Fast, simple & clean TikTok video downloads.
+            </p>
+        </div>
+
+        <div class="footer-links">
+            <a href="#">Home</a>
+            <a href="#">Features</a>
+            <a href="#">About</a>
+            <a href="#">Contact</a>
+        </div>
+
+        <div class="footer-note">
+            <span>© <span id="yr"></span> zEEtiktok</span>
+            <small>
+                Not affiliated with TikTok or ByteDance.
+            </small>
+            <small>
+                Download only content you have rights to.
+            </small>
+        </div>
+
+    </div>
+
+    <div class="footer-bottom">
+        <span>Made with ♥ for creators</span>
+        <span>© <span id="yr2"></span> zEE.lk</span>
+    </div>
+</footer>
+
+<script>
+    const year = new Date().getFullYear();
+    document.getElementById("yr").textContent = year;
+    document.getElementById("yr2").textContent = year;
+</script>
 
 <script>
 /* Replace with YOUR OWN backend. Must accept ?url=<tiktok link> and return
