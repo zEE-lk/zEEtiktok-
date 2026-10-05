@@ -1,0 +1,277 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>zEEtiktok – Download TikTok Videos without Watermark</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Unbounded:wght@500;700;900&family=DM+Sans:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+:root{--pink:#ff2e93;--pink2:#ff8cc6;--blush:#ffe6f2;--plum:#2b0f20;--mut:#7d5f70;--glass:rgba(255,255,255,.62)}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{font-family:'DM Sans',sans-serif;color:var(--plum);background:#fff;overflow-x:hidden}
+h1,h2,h3,.logo{font-family:'Unbounded',sans-serif;letter-spacing:-.03em}
+a{color:inherit;text-decoration:none}
+:focus-visible{outline:3px solid var(--pink);outline-offset:3px}
+/* cursor glow + aurora */
+#glow{position:fixed;width:420px;height:420px;border-radius:50%;pointer-events:none;z-index:0;background:radial-gradient(circle,rgba(255,46,147,.22),transparent 65%);transform:translate(-50%,-50%);left:50%;top:30%}
+.aurora{position:absolute;inset:0;overflow:hidden;z-index:0}
+.blob{position:absolute;border-radius:50%;filter:blur(70px);opacity:.55;animation:drift 14s ease-in-out infinite alternate}
+.b1{width:480px;height:480px;background:#ffb3d6;left:-8%;top:-10%}
+.b2{width:420px;height:420px;background:#ff8cc6;right:-6%;top:10%;animation-delay:-5s}
+.b3{width:360px;height:360px;background:#ffd9ec;left:40%;bottom:-12%;animation-delay:-9s}
+@keyframes drift{to{transform:translate(60px,40px) scale(1.15)}}
+/* nav */
+nav{position:fixed;top:16px;left:50%;translate:-50% 0;z-index:50;display:flex;align-items:center;gap:30px;padding:10px 12px 10px 24px;border-radius:999px;background:var(--glass);backdrop-filter:blur(18px);box-shadow:0 10px 40px rgba(255,46,147,.18),inset 0 0 0 1px #fff;width:min(920px,94vw);justify-content:space-between}
+.logo{font-weight:900;font-size:1.15rem}.logo b{color:var(--pink)}
+nav ul{display:flex;gap:26px;list-style:none;font-weight:500;font-size:.95rem}
+nav ul a:hover{color:var(--pink)}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;border:0;cursor:pointer;font:700 .95rem 'DM Sans';color:#fff;padding:14px 26px;border-radius:999px;background:linear-gradient(135deg,var(--pink),#ff6bb5);box-shadow:0 10px 24px rgba(255,46,147,.4),inset 0 -3px 0 rgba(0,0,0,.12),inset 0 2px 0 rgba(255,255,255,.4);transition:.2s}
+.btn:hover{transform:translateY(-3px) scale(1.02);box-shadow:0 16px 32px rgba(255,46,147,.5),inset 0 -3px 0 rgba(0,0,0,.12)}
+.btn.ghost{background:#fff;color:var(--pink);box-shadow:inset 0 0 0 2px var(--pink)}
+.btn:disabled{opacity:.6;cursor:wait}
+section{position:relative;padding:110px 5vw;z-index:1}
+/* hero */
+#home{min-height:100vh;display:flex;flex-direction:column;align-items:center;text-align:center;padding-top:140px;overflow:hidden}
+.pill{display:inline-flex;gap:8px;align-items:center;padding:8px 16px;border-radius:999px;background:var(--glass);backdrop-filter:blur(10px);box-shadow:inset 0 0 0 1px #ffc2e0;font-size:.85rem;font-weight:500;margin-bottom:26px}
+.pill i{width:8px;height:8px;border-radius:50%;background:var(--pink);animation:pulse 1.6s infinite}
+@keyframes pulse{50%{box-shadow:0 0 0 8px rgba(255,46,147,.2)}}
+h1{font-size:clamp(2.4rem,7vw,5.6rem);line-height:1;font-weight:900;max-width:1000px}
+h1 em{font-style:normal;display:inline-block;background:linear-gradient(120deg,var(--pink),#ff9ad0,var(--pink));background-size:200%;-webkit-background-clip:text;background-clip:text;color:transparent;animation:shine 5s linear infinite;transform:perspective(600px) rotateX(14deg)}
+@keyframes shine{to{background-position:200%}}
+.lead{margin:22px auto 34px;max-width:540px;color:var(--mut);font-size:1.12rem;line-height:1.6}
+.bar{display:flex;gap:8px;width:min(680px,100%);padding:8px;border-radius:999px;background:var(--glass);backdrop-filter:blur(20px);box-shadow:0 24px 60px rgba(255,46,147,.25),inset 0 0 0 2px #fff,0 0 0 1px #ffc2e0}
+.bar input{flex:1;min-width:0;border:0;background:transparent;font:1rem 'DM Sans';padding:0 20px;color:var(--plum)}
+.bar input:focus{outline:none}
+#msg{margin-top:16px;min-height:1.4em;font-weight:500;color:#c4125f}
+/* 3D card fan */
+.fan{margin-top:50px;height:380px;width:min(900px,100%);perspective:1400px;position:relative}
+.fan-in{position:absolute;inset:0;transform-style:preserve-3d;transition:transform .15s ease-out}
+.vc{position:absolute;bottom:0;left:50%;width:210px;height:340px;margin-left:-105px;border-radius:30px;overflow:hidden;box-shadow:0 30px 60px rgba(255,46,147,.35),0 0 0 6px #fff;animation:float 6s ease-in-out infinite}
+.vc img{width:100%;height:100%;object-fit:cover}
+.vc span{position:absolute;left:12px;bottom:12px;padding:6px 12px;border-radius:999px;background:var(--glass);backdrop-filter:blur(8px);font-size:.78rem;font-weight:700}
+.v1{transform:translateX(-230px) translateZ(-60px) rotateY(24deg) rotateZ(-6deg)}
+.v2{transform:translateZ(80px);height:370px;width:230px;margin-left:-115px;animation-delay:-2s}
+.v3{transform:translateX(230px) translateZ(-60px) rotateY(-24deg) rotateZ(6deg);animation-delay:-4s}
+@keyframes float{50%{translate:0 -16px}}
+/* result */
+#result{display:none;width:min(720px,92%);margin:-10px auto 0;padding:22px;border-radius:28px;background:var(--glass);backdrop-filter:blur(20px);box-shadow:0 30px 70px rgba(255,46,147,.3),inset 0 0 0 2px #fff;gap:22px;align-items:center;text-align:left;position:relative;z-index:3}
+#result.show{display:flex;animation:pop .6s cubic-bezier(.2,1.4,.4,1)}
+@keyframes pop{from{opacity:0;transform:perspective(900px) rotateX(35deg) translateY(40px)}}
+#result img{width:130px;height:180px;object-fit:cover;border-radius:20px;background:var(--blush)}
+#result h3{font-size:1.05rem;margin-bottom:6px;line-height:1.3}#result p{color:var(--mut);margin-bottom:14px}
+.row{display:flex;gap:10px;flex-wrap:wrap}
+/* marquee */
+.marq{overflow:hidden;background:var(--pink);color:#fff;padding:16px 0;transform:rotate(-1.5deg);margin:0 -2vw;position:relative;z-index:2}
+.marq div{display:flex;gap:40px;width:max-content;animation:mq 22s linear infinite;font:700 1.1rem 'Unbounded'}
+@keyframes mq{to{transform:translateX(-50%)}}
+/* bento */
+h2{font-size:clamp(1.9rem,4.5vw,3.4rem);line-height:1.05;font-weight:900;margin-bottom:14px}
+.sub{color:var(--mut);max-width:520px;line-height:1.6;margin-bottom:46px}
+.bento{display:grid;grid-template-columns:repeat(4,1fr);grid-auto-rows:190px;gap:20px;perspective:1200px}
+.tile{padding:28px;border-radius:30px;background:linear-gradient(160deg,#fff,var(--blush));box-shadow:0 18px 40px rgba(255,46,147,.13),inset 0 0 0 1.5px #ffd0e6;display:flex;flex-direction:column;justify-content:flex-end;position:relative;overflow:hidden;transition:transform .2s;will-change:transform}
+.tile h3{font-size:1.15rem;margin-bottom:6px}.tile p{color:var(--mut);font-size:.95rem;line-height:1.5}
+.tile .e{position:absolute;top:18px;right:22px;font-size:2.4rem;transform:translateZ(40px)}
+.t1{grid-column:span 2;grid-row:span 2;background:linear-gradient(150deg,var(--pink),#ff7ab8);color:#fff}
+.t1 p{color:#ffe6f2}.t1 .e{font-size:5rem}
+.t4{grid-column:span 2}
+.steps{display:grid;grid-template-columns:repeat(3,1fr);gap:22px}
+.step{padding:30px;border-radius:28px;background:#fff;box-shadow:0 18px 44px rgba(255,46,147,.14),inset 0 0 0 1.5px #ffd0e6}
+.step b{display:grid;place-items:center;width:46px;height:46px;border-radius:14px;background:var(--pink);color:#fff;font:700 1.1rem 'Unbounded';margin-bottom:18px;box-shadow:0 6px 0 #c4125f}
+.step p{color:var(--mut);margin-top:6px;line-height:1.5}
+/* about */
+#about .wrap{display:grid;grid-template-columns:1fr 1fr;gap:56px;align-items:center}
+#about img{width:100%;height:420px;object-fit:cover;border-radius:36px;transform:perspective(1000px) rotateY(-12deg) rotateX(4deg);box-shadow:-20px 24px 0 var(--pink2),0 40px 70px rgba(255,46,147,.3);transition:.5s}
+#about img:hover{transform:none}
+#about p{color:var(--mut);line-height:1.7;margin-bottom:14px}
+/* faq */
+details{border-radius:22px;background:#fff;box-shadow:inset 0 0 0 1.5px #ffd0e6;padding:20px 24px;margin-bottom:12px;max-width:760px;transition:.2s}
+details[open]{box-shadow:0 14px 34px rgba(255,46,147,.18),inset 0 0 0 2px var(--pink)}
+summary{cursor:pointer;font-weight:700;list-style:none;display:flex;justify-content:space-between}
+summary::after{content:"+";color:var(--pink);font-size:1.4rem;line-height:1}
+details[open] summary::after{content:"–"}
+details p{margin-top:12px;color:var(--mut);line-height:1.6}
+/* contact */
+#contact form{max-width:640px;display:grid;gap:14px;padding:32px;border-radius:32px;background:var(--glass);backdrop-filter:blur(18px);box-shadow:0 30px 70px rgba(255,46,147,.22),inset 0 0 0 2px #fff,0 0 0 1px #ffc2e0}
+.f,textarea{width:100%;padding:16px 20px;border:2px solid transparent;border-radius:18px;font:1rem 'DM Sans';background:#fff;box-shadow:0 0 0 1px #ffd0e6;color:var(--plum)}
+.f:focus,textarea:focus{outline:none;border-color:var(--pink)}
+footer{padding:36px 5vw;text-align:center;color:var(--mut);font-size:.9rem;position:relative;z-index:1}
+.rv{opacity:0;transform:translateY(40px) rotateX(10deg);transition:1s cubic-bezier(.2,.8,.2,1)}.rv.in{opacity:1;transform:none}
+@media(max-width:860px){nav ul{display:none}.bento{grid-template-columns:1fr 1fr;grid-auto-rows:170px}.t1,.t4{grid-column:span 2}.steps,#about .wrap{grid-template-columns:1fr}.fan{height:330px}.v1{transform:translateX(-120px) rotateZ(-8deg) scale(.8)}.v3{transform:translateX(120px) rotateZ(8deg) scale(.8)}#result{flex-direction:column;text-align:center}.bar{border-radius:28px;flex-direction:column}.bar input{padding:14px}}
+@media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}.rv{opacity:1;transform:none}}
+</style>
+</head>
+<body>
+<div id="glow"></div>
+<nav>
+  <a href="#home" class="logo">z<b>EE</b>tiktok</a>
+  <ul><li><a href="#home">Home</a></li><li><a href="#features">Features</a></li><li><a href="#about">About</a></li><li><a href="#contact">Contact</a></li></ul>
+  <a href="#home" class="btn" style="padding:11px 22px">Download</a>
+</nav>
+
+<section id="home">
+  <div class="aurora"><div class="blob b1"></div><div class="blob b2"></div><div class="blob b3"></div></div>
+  <div style="position:relative;z-index:2;width:100%;display:flex;flex-direction:column;align-items:center">
+    <div class="pill"><i></i>Free · No sign-up · HD quality</div>
+    <h1>TikTok videos, <em>zero watermark</em></h1>
+    <p class="lead">Paste your TikTok link and get a clean MP4 in seconds. Works on phone and desktop.</p>
+    <div class="bar">
+      <input id="url" type="url" placeholder="Paste TikTok link here…" aria-label="TikTok video link">
+      <button class="btn" id="go">Generate</button>
+    </div>
+    <p id="msg" role="status"></p>
+    <div id="result">
+      <img id="rThumb" alt="Video thumbnail" src="">
+      <div>
+        <h3 id="rTitle">Your video is ready</h3>
+        <p id="rAuthor"></p>
+        <div class="row"><button class="btn" id="dlHd">Download HD</button><button class="btn ghost" id="dlSd">Download SD</button></div>
+      </div>
+    </div>
+    <div class="fan" id="fan"><div class="fan-in" id="fanin">
+      <div class="vc v1"><img alt="" src="https://images.unsplash.com/photo-1516251193007-45ef944ab0c6?w=420&q=70"><span>🎬 Creators</span></div>
+      <div class="vc v2"><img alt="" src="https://images.unsplash.com/photo-1611162617213-7d7a39e9b1d7?w=460&q=70"><span>✅ No watermark</span></div>
+      <div class="vc v3"><img alt="" src="https://images.unsplash.com/photo-1598387993441-a364f854c3e1?w=420&q=70"><span>⚡ HD</span></div>
+    </div></div>
+  </div>
+</section>
+
+<div class="marq" aria-hidden="true"><div>
+  <span>NO WATERMARK ✦</span><span>HD QUALITY ✦</span><span>FREE FOREVER ✦</span><span>FAST ✦</span><span>NO SIGN-UP ✦</span>
+  <span>NO WATERMARK ✦</span><span>HD QUALITY ✦</span><span>FREE FOREVER ✦</span><span>FAST ✦</span><span>NO SIGN-UP ✦</span>
+</div></div>
+
+<section id="features">
+  <h2 class="rv">Everything you need,<br>nothing you don't</h2>
+  <p class="sub rv">Built to be quick and simple on every device.</p>
+  <div class="bento rv">
+    <div class="tile t1"><span class="e">💧</span><h3>Clean video, no logo</h3><p>The moving TikTok watermark is gone. Save the original picture only.</p></div>
+    <div class="tile"><span class="e">⚡</span><h3>Fast</h3><p>Ready in seconds.</p></div>
+    <div class="tile"><span class="e">📱</span><h3>Any device</h3><p>Phone, tablet, PC.</p></div>
+    <div class="tile t4"><span class="e">🎞️</span><h3>HD and SD</h3><p>Choose the quality that fits your storage and your screen.</p></div>
+  </div>
+</section>
+
+<section id="how" style="padding-top:20px">
+  <h2 class="rv">Three steps</h2>
+  <p class="sub rv">Copy, paste, download.</p>
+  <div class="steps rv">
+    <div class="step"><b>1</b><h3>Copy</h3><p>In TikTok tap Share, then Copy link.</p></div>
+    <div class="step"><b>2</b><h3>Paste</h3><p>Paste it above and press Generate.</p></div>
+    <div class="step"><b>3</b><h3>Download</h3><p>Pick HD or SD and save the MP4.</p></div>
+  </div>
+</section>
+
+<section id="about" style="background:linear-gradient(#fff,var(--blush))">
+  <div class="wrap">
+    <img class="rv" alt="Creative team working together" src="https://images.unsplash.com/photo-1522202176988-66273c2fd55f?w=900&q=70">
+    <div class="rv">
+      <h2>About zEEtiktok</h2>
+      <p>zEEtiktok helps creators, marketers and fans save their own TikTok videos in clean HD.</p>
+      <p>We keep the site fast, simple and free. Please download only videos you made or have permission to use, and credit the creator.</p>
+    </div>
+  </div>
+</section>
+
+<section id="faq">
+  <h2 class="rv">Questions</h2><p class="sub rv"></p>
+  <details><summary>Is zEEtiktok free?</summary><p>Yes. No account, no payment.</p></details>
+  <details><summary>Where is the video saved?</summary><p>In your device's Downloads folder or gallery, depending on your browser.</p></details>
+  <details><summary>Can I download private videos?</summary><p>No. Only public videos can be saved.</p></details>
+</section>
+
+<section id="contact" style="background:linear-gradient(var(--blush),#fff)">
+  <h2 class="rv">Contact us</h2>
+  <p class="sub rv">Feedback or a problem with a link? Tell us.</p>
+  <form id="cf" class="rv">
+    <input type="hidden" name="access_key" value="68d2f152-991c-42d6-a6f7-8537467a1554">
+    <input type="hidden" name="subject" value="New message from zEEtiktok website">
+    <input type="hidden" name="from_name" value="zEEtiktok Website">
+    <input type="checkbox" name="botcheck" style="display:none" tabindex="-1" autocomplete="off">
+    <input class="f" name="name" placeholder="Your name" required aria-label="Name">
+    <input class="f" name="email" type="email" placeholder="Email address" required aria-label="Email">
+    <textarea name="message" rows="5" placeholder="Your message" required aria-label="Message"></textarea>
+    <button class="btn" id="send" type="submit">Send message</button>
+    <p id="cmsg" role="status" style="color:var(--pink);font-weight:700"></p>
+  </form>
+</section>
+
+<footer>© <span id="yr"></span> zEEtiktok. Not affiliated with TikTok or ByteDance. Download only content you have rights to.</footer>
+
+<script>
+/* Replace with YOUR OWN backend. Must accept ?url=<tiktok link> and return
+   { code:0, data:{ title, cover, play, hdplay, author:{nickname} } } */
+const API = "https://www.tikwm.com/api/?url=";
+const $ = id => document.getElementById(id);
+$("yr").textContent = new Date().getFullYear();
+let current = null;
+
+$("go").onclick = async () => {
+  const link = $("url").value.trim(), msg = $("msg"), res = $("result");
+  res.classList.remove("show");
+  if (!/^https?:\/\/(www\.|vm\.|vt\.|m\.)?tiktok\.com\//i.test(link)) { msg.textContent = "Please paste a valid TikTok link."; return; }
+  msg.textContent = "Generating your video…"; $("go").disabled = true;
+  try {
+    const j = await (await fetch(API + encodeURIComponent(link))).json();
+    if (j.code !== 0 || !j.data) throw 0;
+    current = j.data;
+    $("rThumb").src = current.cover || "";
+    $("rTitle").textContent = (current.title || "TikTok video").slice(0, 90);
+    $("rAuthor").textContent = current.author ? "by @" + (current.author.unique_id || current.author.nickname) : "";
+    $("dlHd").style.display = current.hdplay ? "" : "none";
+    res.classList.add("show"); msg.textContent = "Done! Your video is ready.";
+  } catch { msg.textContent = "Could not get this video. Check the link or try again later."; }
+  finally { $("go").disabled = false; }
+};
+$("url").addEventListener("keydown", e => e.key === "Enter" && $("go").click());
+
+async function save(src, name) {
+  try { const b = await (await fetch(src)).blob(), a = document.createElement("a"); a.href = URL.createObjectURL(b); a.download = name; a.click(); }
+  catch { window.open(src, "_blank"); }
+}
+$("dlHd").onclick = () => current && save(current.hdplay, "zEEtiktok-hd.mp4");
+$("dlSd").onclick = () => current && save(current.play, "zEEtiktok.mp4");
+
+/* cursor glow + hero 3D parallax */
+const glow = $("glow"), fan = $("fan"), fanin = $("fanin");
+addEventListener("pointermove", e => { glow.style.left = e.clientX + "px"; glow.style.top = e.clientY + "px"; });
+fan.addEventListener("pointermove", e => {
+  const r = fan.getBoundingClientRect(), x = (e.clientX - r.left) / r.width - .5, y = (e.clientY - r.top) / r.height - .5;
+  fanin.style.transform = `rotateY(${x * 22}deg) rotateX(${-y * 12}deg)`;
+});
+fan.addEventListener("pointerleave", () => fanin.style.transform = "");
+
+/* tilt tiles */
+document.querySelectorAll(".tile,.step").forEach(c => {
+  c.addEventListener("pointermove", e => {
+    const r = c.getBoundingClientRect(), x = (e.clientX - r.left) / r.width - .5, y = (e.clientY - r.top) / r.height - .5;
+    c.style.transform = `rotateY(${x * 12}deg) rotateX(${-y * 12}deg) translateY(-4px)`;
+  });
+  c.addEventListener("pointerleave", () => c.style.transform = "");
+});
+
+/* scroll reveal */
+const io = new IntersectionObserver(es => es.forEach(e => e.isIntersecting && (e.target.classList.add("in"), io.unobserve(e.target))), {threshold:.15});
+document.querySelectorAll(".rv").forEach(el => io.observe(el));
+
+$("cf").addEventListener("submit", async e => {
+  e.preventDefault();
+  const form = e.target, out = $("cmsg"), btn = $("send");
+  btn.disabled = true; btn.textContent = "Sending…"; out.textContent = "";
+  try {
+    const r = await fetch("https://api.web3forms.com/submit", {
+      method: "POST",
+      headers: { "Content-Type": "application/json", "Accept": "application/json" },
+      body: JSON.stringify(Object.fromEntries(new FormData(form)))
+    });
+    const j = await r.json();
+    if (j.success) { out.style.color = "#1a9e5c"; out.textContent = "✅ Message sent! We'll reply soon."; form.reset(); }
+    else throw new Error(j.message);
+  } catch (err) {
+    out.style.color = "#c4125f"; out.textContent = "Could not send your message. Please try again.";
+  } finally { btn.disabled = false; btn.textContent = "Send message"; }
+});
+</script>
+</body>
+</html>
